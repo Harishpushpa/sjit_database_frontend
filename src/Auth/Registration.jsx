@@ -19,7 +19,7 @@ const Registration = () => {
         const usersenddata = { email, password };
 
         try {
-            const response = await axios.post("https://placeme-database-backend.onrender.com/register", usersenddata);
+            const response = await fetch.post("https://placeme-database-backend.onrender.com/register", usersenddata);
             setMessage(response.data.message);
             setEmail("");
             setPassword("");
