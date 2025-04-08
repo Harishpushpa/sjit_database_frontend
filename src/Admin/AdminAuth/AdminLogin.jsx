@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import '../../css/loginpage.css'
+import '../../css/LoginPage.css'
 export default function Adminlogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
