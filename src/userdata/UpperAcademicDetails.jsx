@@ -111,7 +111,7 @@ export const UpperAcademicDetails = () => {
         return;
       }
   
-      const response = await fetch("http://localhost:5000/UpperAcademicDetails", {
+      const response = await fetch("https://placeme-database-backend.onrender.com/UpperAcademicDetails", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

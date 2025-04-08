@@ -21,7 +21,7 @@ export default function Adminlogin() {
     e.preventDefault();
     setError("");
 
-    const response = await fetch("http://localhost:5000/adminlogin", {
+    const response = await fetch("https://placeme-database-backend.onrender.com/adminlogin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

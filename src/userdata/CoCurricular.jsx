@@ -56,7 +56,7 @@ const CoCurricular = () => {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch("http://localhost:5000/cocurricular", {
+      const response = await fetch("https://placeme-database-backend.onrender.com/cocurricular", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

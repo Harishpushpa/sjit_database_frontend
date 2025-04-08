@@ -69,7 +69,7 @@ export const PrimaryData = () => {
     setError(null);
     
     try {
-      const response = await fetch("http://localhost:5000/primarydata", {
+      const response = await fetch("https://placeme-database-backend.onrender.com/primarydata", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -47,7 +47,7 @@ export const Personaldata = () => {
   // Function to update user data in the backend
   const updatedData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/update", {
+      const response = await fetch("https://placeme-database-backend.onrender.com/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
