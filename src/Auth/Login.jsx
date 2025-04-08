@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import '../css/loginpage.css'; // Import the CSS file
+import '../css/LoginPage.css'; // Import the CSS file
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
