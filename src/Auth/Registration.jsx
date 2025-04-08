@@ -18,28 +18,15 @@ const Registration = () => {
         const usersenddata = { email, password };
 
         try {
-            const response = await fetch("https://placeme-database-backend.onrender.com/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(usersenddata),
-            });
+            const response = await fetch.post("https://placeme-database-backend.onrender.com/register", usersenddata);
+            setMessage(response.data.message);
+            setEmail("");
+            setPassword("");
 
-            const data = await response.json();
-
-            if (response.ok) {
-                setMessage(data.message);
-                setEmail("");
-                setPassword("");
-
-                // Navigate to login after successful registration
-                setTimeout(() => navigate('/login'), 1000);
-            } else {
-                setError(data.message || "Registration failed");
-            }
+            // Navigate to login after successful registration
+            setTimeout(() => navigate('/login'), 1000);
         } catch (error) {
-            setError(error.message || "Registration failed");
+            setError(error?.response?.data?.message || "Registration failed");
         }
     };
 
