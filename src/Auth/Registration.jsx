@@ -37,7 +37,7 @@ const Registration = () => {
             setPassword("");
     
             // Navigate to login after successful registration
-            setTimeout(() => navigate('/login'), 1000);
+            setTimeout(() => navigate('/login'));
         } catch (error) {
             setError(error.message || "Registration failed");
         }
