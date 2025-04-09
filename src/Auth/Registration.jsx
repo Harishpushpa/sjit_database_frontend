@@ -22,10 +22,12 @@ const Registration = () => {
             setMessage(response.data.message);
             setEmail("");
             setPassword("");
+            
 
             // Navigate to login after successful registration
             setTimeout(() => navigate('/login'), 1000);
         } catch (error) {
+            console.log(response);
             setError(error?.response?.data?.message || "Registration failed");
         }
     };
