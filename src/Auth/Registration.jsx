@@ -14,9 +14,9 @@ const Registration = () => {
         e.preventDefault();
         setMessage("");
         setError("");
-    
+
         const usersenddata = { email, password };
-    
+
         try {
             const response = await fetch("https://placeme-database-backend.onrender.com/register", {
                 method: "POST",
@@ -25,31 +25,36 @@ const Registration = () => {
                 },
                 body: JSON.stringify(usersenddata),
             });
-    
+
             const data = await response.json();
-    
+
             if (!response.ok) {
-                throw new Error(data.message || "Registration failed");
+                // 👉 Show backend error directly
+                setError(data.message || "Registration failed");
+                return;
             }
-    
+
+            // 👉 On success
             setMessage(data.message);
             setEmail("");
             setPassword("");
-    
-            // Navigate to login after successful registration
-            setTimeout(() => navigate('/login'));
+
+            // 👉 Navigate to login after short delay
+            setTimeout(() => navigate('/login'), 1500);
         } catch (error) {
-            setError(error.message || "Registration failed");
+            setError("Something went wrong. Please try again.");
         }
     };
-    
 
     return (
         <div className="register-container">
             <div className="register-box">
                 <h2>Create Account</h2>
+
+                {/* 👉 Display success or error message */}
                 {message && <p className="success-message">{message}</p>}
                 {error && <p className="error-message">{error}</p>}
+
                 <form onSubmit={handleRegister}>
                     <div className="input-group">
                         <input
@@ -80,6 +85,7 @@ const Registration = () => {
                     </div>
                     <button type="submit" className="btn-register">Register</button>
                 </form>
+                
                 <p className="login-text">
                     Already have an account? 
                     <span onClick={() => navigate('/login')} className="login-link"> Login</span>
