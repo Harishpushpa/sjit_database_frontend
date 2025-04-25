@@ -11,7 +11,7 @@ import CoCurricular from './userdata/CoCurricular'
 import Adminlogin from './Admin/AdminAuth/AdminLogin'
 import { AdminDesktop } from './Admin/AdminInterface/AdminDesktop'
 import { UpdateNews } from './Admin/Function/UpdateNews'
-
+import Studentsdata from  "./Admin/Function/Studentsdata" 
  const App = () => {
   return (
     <Router>
@@ -28,6 +28,7 @@ import { UpdateNews } from './Admin/Function/UpdateNews'
         <Route path="Adminlogin" element={<Adminlogin/>}/>
         <Route path="AdminDesktop" element={<AdminDesktop/>}/>
         <Route path="/updatenews" element={<UpdateNews/>}/>
+        <Route path="/studentsdataforadmin" element={<Studentsdata/>}/>
       </Routes>
     </Router>
   )

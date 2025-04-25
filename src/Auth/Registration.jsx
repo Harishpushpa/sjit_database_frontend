@@ -40,7 +40,7 @@ const Registration = () => {
             setPassword("");
 
             // 👉 Navigate to login after short delay
-            setTimeout(() => navigate('/login'), 1500);
+         navigate('/login')
         } catch (error) {
             setError("Something went wrong. Please try again.");
         }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Personaldata.css"; // Import your CSS file for styling
+
 export const Personaldata = () => {
   const [userData, setUserData] = useState({
     firstName: "",
@@ -15,14 +16,13 @@ export const Personaldata = () => {
     college: "",
     department: "",
     section: "",
-    email: "" // Email is not editable
+    email: "",
   });
 
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user data from sessionStorage
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
     if (!storedData || !storedData.user) {
@@ -35,7 +35,6 @@ export const Personaldata = () => {
     setUserData(storedData.user);
   }, [navigate]);
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
@@ -44,7 +43,6 @@ export const Personaldata = () => {
     }));
   };
 
-  // Function to update user data in the backend
   const updatedData = async () => {
     try {
       const response = await fetch("https://placeme-database-backend.onrender.com/update", {
@@ -60,7 +58,7 @@ export const Personaldata = () => {
       if (response.ok) {
         console.log("Data updated successfully:", data);
         alert("Profile updated successfully!");
-        sessionStorage.setItem("userData", JSON.stringify({ user: userData })); // Update session storage
+        sessionStorage.setItem("userData", JSON.stringify({ user: userData }));
       } else {
         console.error("Error updating data:", data.message);
         alert("Error updating profile.");
@@ -71,10 +69,9 @@ export const Personaldata = () => {
     }
   };
 
-  // Handle update button click
   const handleUpdate = async () => {
-    await updatedData(); // Call API to update data
-    setIsEditing(false); // Disable editing mode after update
+    await updatedData();
+    setIsEditing(false);
   };
 
   return (
@@ -143,43 +140,58 @@ export const Personaldata = () => {
         </div>
         <div>
           <label>Batch</label>
-          <input
-            type="text"
+          <select
             name="batch"
             value={userData.batch}
             onChange={handleChange}
             disabled={!isEditing}
-          />
+          >
+            <option value="">Select Batch</option>
+            <option value="2026-2030">2026-2030</option>
+            <option value="2025-2029">2025-2029</option>
+            <option value="2024-2028">2024-2028</option>
+            <option value="2023-2027">2023-2027</option>
+            <option value="2022-2026">2022-2026</option>
+          </select>
         </div>
         <div>
           <label>Title</label>
-          <input
-            type="text"
+          <select
             name="title"
             value={userData.title}
             onChange={handleChange}
             disabled={!isEditing}
-          />
+          >
+            <option value="">Select Title</option>
+            <option value="Mr.">Mr.</option>
+            <option value="Miss">Miss</option>
+          </select>
         </div>
         <div>
           <label>Gender</label>
-          <input
-            type="text"
+          <select
             name="gender"
             value={userData.gender}
             onChange={handleChange}
             disabled={!isEditing}
-          />
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
         </div>
         <div>
           <label>College</label>
-          <input
-            type="text"
+          <select
             name="college"
             value={userData.college}
             onChange={handleChange}
             disabled={!isEditing}
-          />
+          >
+            <option value="">Select College</option>
+            <option value="St. Joseph's Institute of Technology">St. Joseph's Institute of Technology</option>
+            <option value="St. Joseph's College of Engineering">St. Joseph's College of Engineering</option>
+          </select>
         </div>
         <div>
           <label>Department</label>
@@ -203,7 +215,7 @@ export const Personaldata = () => {
         </div>
         <div>
           <label>Email</label>
-          <input type="text" value={userData.email} disabled /> {/* Email is non-editable */}
+          <input type="text" value={userData.email} disabled />
         </div>
       </form>
 
@@ -213,7 +225,7 @@ export const Personaldata = () => {
         ) : (
           <button onClick={() => setIsEditing(true)}>Edit</button>
         )}
-        <button onClick={()=>navigate('/maindesktop')}>maindesktop</button>
+        <button onClick={() => navigate('/maindesktop')}>Main Desktop</button>
       </div>
     </div>
   );

@@ -1,0 +1,115 @@
+.students-data-container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-box input {
+  padding: 8px 15px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 3px;
+  margin-right: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.tab-button:hover {
+  background: #d0d0d0;
+}
+
+.tab-button.active {
+  background: #1976d2;
+  color: white;
+  font-weight: 500;
+}
+
+.table-scroll-container {
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.student-data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.student-data-table th {
+  background-color: #f0f2f5;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  position: sticky;
+  top: 0;
+}
+
+.student-data-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.student-data-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.student-name {
+  font-weight: 500;
+  color: #1976d2;
+}
+
+.status-message {
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.status-message.error {
+  color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-box input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .tab-button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}

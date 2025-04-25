@@ -16,7 +16,7 @@ export const AdminDesktop = () => {
             </div>
             <div className="header">
                 <button onClick={() => navigate('/updatenews')}>Update News</button>
-                <button onClick={() => navigate('/LowerAcademicDetails')}>Student Data</button>
+                <button onClick={() => navigate('/studentsdataforadmin')}>Student Data</button>
                 
             </div>
             </div>
