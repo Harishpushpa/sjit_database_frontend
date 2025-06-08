@@ -277,19 +277,25 @@ export const UpperAcademicDetails = () => {
             </td>
           </tr>
           <tr>
-            <td>History of Arrears (Y/N)</td>
-            <td>
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="historyOfArrears"
-                  value={editableDetails.historyOfArrears}
-                  onChange={handleChange}
-                />
-              ) : (
-                academicDetails.historyOfArrears || "N/A"
-              )}
-            </td>
+            <tr>
+  <td>History of Arrears (Y/N)</td>
+  <td>
+    {isEditing ? (
+      <select
+        name="historyOfArrears"
+        value={editableDetails.historyOfArrears}
+        onChange={handleChange}
+      >
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    ) : (
+      academicDetails.historyOfArrears || "N/A"
+    )}
+  </td>
+</tr>
+
           </tr>
           <tr>
             <td>If Yes, How Many?</td>
