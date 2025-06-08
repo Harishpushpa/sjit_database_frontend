@@ -1,115 +1,219 @@
+/* Container */
 .students-data-container {
-  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 15px 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  color: #333;
 }
 
-.controls {
+/* Heading */
+.students-data-container h2 {
+  text-align: center;
   margin-bottom: 20px;
+  color: #2c3e50;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Controls (search & sort) */
+.controls {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.controls input[type="text"] {
+  flex: 1 1 300px;
+  padding: 10px 12px;
+  border: 1.8px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.controls input[type="text"]:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52,152,219,0.4);
+}
+
+.sort-select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1.8px solid #ccc;
+  background-color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.sort-select:hover,
+.sort-select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Filters section */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.filters label {
+  display: flex;
   align-items: center;
+  gap: 8px;
+  min-width: 180px;
 }
 
-.search-box input {
-  padding: 8px 15px;
-  width: 300px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+.filters select,
+.filters input[type="number"] {
+  padding: 6px 8px;
+  border: 1.5px solid #bbb;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  width: 80px;
+  transition: border-color 0.3s ease;
 }
 
+.filters select:focus,
+.filters input[type="number"]:focus {
+  border-color: #2980b9;
+  outline: none;
+  box-shadow: 0 0 5px rgba(41,128,185,0.5);
+}
+
+/* Tabs */
 .tabs {
   display: flex;
-  margin-bottom: 1rem;
-  overflow-x: auto;
-  background: #f5f5f5;
-  border-radius: 4px;
-  padding: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .tab-button {
-  padding: 8px 16px;
-  background: #e0e0e0;
+  background: #ecf0f1;
   border: none;
-  border-radius: 3px;
-  margin-right: 5px;
+  padding: 10px 18px;
+  border-radius: 30px;
   cursor: pointer;
-  white-space: nowrap;
-  font-size: 14px;
-  transition: all 0.3s;
+  font-weight: 600;
+  color: #34495e;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 120px;
+  text-align: center;
 }
 
+.tab-button.active,
 .tab-button:hover {
-  background: #d0d0d0;
+  background: #3498db;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
 }
 
-.tab-button.active {
-  background: #1976d2;
-  color: white;
-  font-weight: 500;
-}
-
+/* Table container for horizontal scroll */
 .table-scroll-container {
   overflow-x: auto;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
 }
 
+/* Table */
 .student-data-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 900px;
 }
 
-.student-data-table th {
-  background-color: #f0f2f5;
-  padding: 12px 15px;
-  text-align: left;
-  font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #ddd;
-  position: sticky;
-  top: 0;
+.student-data-table thead {
+  background-color: #2980b9;
+  color: white;
+  font-weight: 700;
 }
 
+.student-data-table th,
 .student-data-table td {
-  padding: 10px 15px;
-  border-bottom: 1px solid #eee;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  text-align: left;
   vertical-align: middle;
 }
 
-.student-data-table tr:hover {
-  background-color: #f5f5f5;
+.student-data-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.student-data-table tbody tr:hover {
+  background-color: #d6eaff;
+  cursor: pointer;
 }
 
 .student-name {
-  font-weight: 500;
-  color: #1976d2;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
+/* Status messages */
 .status-message {
-  padding: 20px;
   text-align: center;
-  font-size: 16px;
+  font-size: 1.1rem;
+  color: #555;
+  margin: 50px 0;
 }
 
 .status-message.error {
-  color: #d32f2f;
+  color: #c0392b;
 }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
+  .filters label {
+    min-width: 140px;
+    flex: 1 1 45%;
+  }
+
   .controls {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 12px;
   }
-  
-  .search-box input {
+
+  .controls input[type="text"],
+  .sort-select {
     width: 100%;
-    margin-bottom: 10px;
+  }
+
+  .student-data-table {
+    font-size: 0.85rem;
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    flex-direction: column;
+    gap: 15px;
   }
   
+  .filters label {
+    min-width: 100%;
+  }
+
   .tab-button {
-    padding: 6px 12px;
-    font-size: 13px;
+    min-width: 100px;
+    font-size: 0.85rem;
+    padding: 8px 12px;
   }
 }

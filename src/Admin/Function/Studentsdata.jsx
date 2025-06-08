@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../cssforAdmin/Studentsdata.css";
+import { useNavigate } from "react-router-dom";
 
 const Studentsdata = () => {
   const [students, setStudents] = useState([]);
@@ -8,7 +9,23 @@ const Studentsdata = () => {
   const [activeTab, setActiveTab] = useState("basic");
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredStudents, setFilteredStudents] = useState([]);
-  const [sortOption, setSortOption] = useState(""); // "asc" | "desc"
+  const navigate = useNavigate();
+
+
+  // Filter states
+  const [arrearsHistory, setArrearsHistory] = useState("");
+  const [currentArrearsValue, setCurrentArrearsValue] = useState("");
+  const [currentArrearsCompare, setCurrentArrearsCompare] = useState("above");
+  const [tenthMark, setTenthMark] = useState("");
+  const [tenthCompare, setTenthCompare] = useState("above");
+  const [twelfthMark, setTwelfthMark] = useState("");
+  const [twelfthCompare, setTwelfthCompare] = useState("above");
+  const [selectedBatch, setSelectedBatch] = useState("");
+
+  // Extract unique batches from student data
+  const availableBatches = [...new Set(students.map(student => student.batch || ""))]
+    .filter(batch => batch !== "")
+    .sort();
 
   const fieldGroups = {
     basic: {
@@ -163,6 +180,7 @@ const Studentsdata = () => {
   useEffect(() => {
     let results = [...students];
 
+    // Search logic
     if (searchTerm.trim() !== "") {
       results = results.filter((student) =>
         (student.firstName || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -173,14 +191,60 @@ const Studentsdata = () => {
       );
     }
 
-    if (sortOption === "asc") {
-      results.sort((a, b) => (a.batch || "").localeCompare(b.batch || ""));
-    } else if (sortOption === "desc") {
-      results.sort((a, b) => (b.batch || "").localeCompare(a.batch || ""));
+    // Arrears history
+    if (arrearsHistory) {
+      results = results.filter(student =>
+        (student.historyOfArrears || "").toLowerCase() === arrearsHistory.toLowerCase()
+      );
+    }
+
+    // Current arrears
+    if (currentArrearsValue !== "") {
+      results = results.filter(student => {
+        const arrears = Number(student.totalStandingArrears) || 0;
+        const filterVal = Number(currentArrearsValue);
+        return currentArrearsCompare === "above" ? arrears > filterVal : arrears < filterVal;
+      });
+    }
+
+    // 10th mark
+    if (tenthMark !== "") {
+      results = results.filter(student => {
+        const mark = Number(student.tenthPercentage) || 0;
+        const filterVal = Number(tenthMark);
+        return tenthCompare === "above" ? mark > filterVal : mark < filterVal;
+      });
+    }
+
+    // 12th mark
+    if (twelfthMark !== "") {
+      results = results.filter(student => {
+        const mark = Number(student.twelfthPercentage) || 0;
+        const filterVal = Number(twelfthMark);
+        return twelfthCompare === "above" ? mark > filterVal : mark < filterVal;
+      });
+    }
+
+    // Batch filter
+    if (selectedBatch) {
+      results = results.filter(student => 
+        (student.batch || "").toString() === selectedBatch
+      );
     }
 
     setFilteredStudents(results);
-  }, [searchTerm, students, sortOption]);
+  }, [
+    searchTerm,
+    students,
+    arrearsHistory,
+    currentArrearsValue,
+    currentArrearsCompare,
+    tenthMark,
+    tenthCompare,
+    twelfthMark,
+    twelfthCompare,
+    selectedBatch
+  ]);
 
   const formatValue = (value) => {
     if (value === null || value === undefined) return '-';
@@ -195,6 +259,8 @@ const Studentsdata = () => {
   return (
     <div className="students-data-container">
       <h2>Student Records Management</h2>
+      <button onClick={()=> navigate('/AdminDesktop')}>main desktop</button>
+
 
       <div className="controls">
         <input
@@ -203,16 +269,84 @@ const Studentsdata = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+      </div>
 
-        <select
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          className="sort-select"
-        >
-          <option value="">Sort by Batch</option>
-          <option value="asc">Batch ↑ Ascending</option>
-          <option value="desc">Batch ↓ Descending</option>
-        </select>
+      <div className="filters-container">
+        <div className="filters">
+          <div className="filter-group">
+            <label>
+              History of Arrears:
+              <select value={arrearsHistory} onChange={(e) => setArrearsHistory(e.target.value)}>
+                <option value="">--Any--</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="filter-group">
+            <label>
+              Current Arrears:
+              <select value={currentArrearsCompare} onChange={(e) => setCurrentArrearsCompare(e.target.value)}>
+                <option value="above">Above</option>
+                <option value="below">Below</option>
+              </select>
+              <input
+                type="number"
+                value={currentArrearsValue}
+                onChange={(e) => setCurrentArrearsValue(e.target.value)}
+                placeholder="Enter number"
+              />
+            </label>
+          </div>
+
+          <div className="filter-group">
+            <label>
+              10th Mark:
+              <select value={tenthCompare} onChange={(e) => setTenthCompare(e.target.value)}>
+                <option value="above">Above</option>
+                <option value="below">Below</option>
+              </select>
+              <input
+                type="number"
+                value={tenthMark}
+                onChange={(e) => setTenthMark(e.target.value)}
+                placeholder="10th %"
+              />
+            </label>
+          </div>
+
+          <div className="filter-group">
+            <label>
+              12th Mark:
+              <select value={twelfthCompare} onChange={(e) => setTwelfthCompare(e.target.value)}>
+                <option value="above">Above</option>
+                <option value="below">Below</option>
+              </select>
+              <input
+                type="number"
+                value={twelfthMark}
+                onChange={(e) => setTwelfthMark(e.target.value)}
+                placeholder="12th %"
+              />
+            </label>
+          </div>
+
+          <div className="filter-group">
+            <label>
+              Batch:
+              <select 
+                value={selectedBatch} 
+                onChange={(e) => setSelectedBatch(e.target.value)}
+              >
+                <option value="">All Batches</option>
+                {availableBatches.map(batch => (
+                  <option key={batch} value={batch}>{batch}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+        </div>
       </div>
 
       <div className="tabs">
@@ -231,7 +365,7 @@ const Studentsdata = () => {
         <table className="student-data-table">
           <thead>
             <tr>
-              <th>#</th>
+              <th>S.No</th>
               <th>Student Name</th>
               {fieldGroups[activeTab].fields.map((field, index) => (
                 <th key={index}>{field.label}</th>
