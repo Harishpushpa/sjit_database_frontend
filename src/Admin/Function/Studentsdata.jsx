@@ -160,10 +160,7 @@ const Studentsdata = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/studentsdataforadmin",{
-      method: "GET",
-  params: { isTrusted: true }
-    })
+    fetch("http://localhost:5000/studentsdataforadmin")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch data");
         return res.json();
